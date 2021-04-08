@@ -5,5 +5,5 @@ describe('Affichage trending',()=> {
         cy.get('[data-testid="cheminTrending"]').click()
         cy.get('[data-testid="emailUser"]').should('have.value', "")
         cy.contains('New message')
-    })
+    });
 })
