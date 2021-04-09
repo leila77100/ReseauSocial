@@ -1,4 +1,3 @@
-import { set } from 'mongoose';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from '../actions/post.actions';

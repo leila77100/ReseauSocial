@@ -15,13 +15,16 @@ $font-1: "font-1", sans-serif;
 $font-2: "font-2", serif;
 $font-3: "font-3", serif;
 
-$color-1: #ff7b77;
-$color-2: #ffd0c4;
+$color-1: #0081C9;
+$color-2: #51ACEC;
 $color-3: rgb(0, 22, 44);
-$color-4: #fdeeee;
-$black: rgb(40, 40, 40);
+$color-4: #ABDFFC;
+$color-5: #8AC6F1;
+$color-6: #C3E1F6;
+$color-7: #FCFCFC;
+$black: rgb(141, 143, 156);
 $white: rgb(253, 253, 253);
-$shadow: rgb(219, 218, 218);
+$shadow: rgb(17, 55, 180);
 
 * {
   margin: 0;
@@ -56,7 +59,7 @@ textarea {
 button,
 input[type="submit"] {
   background: $color-2;
-  color: $color-1;
+  color: $color-7;
   font-family: $font-3;
   cursor: pointer;
   transition: 0.2s;
