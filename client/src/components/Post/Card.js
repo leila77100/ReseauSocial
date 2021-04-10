@@ -6,6 +6,8 @@ import { dateParser, isEmpty } from '../utils';
 import LikeButton from './LikeButton';
 import DeleteCard from './DeleteCard';
 import CardComments from './CardComments';
+import { EmailShareButton, EmailIcon, FacebookShareButton, FacebookIcon, TelegramShareButton, TelegramIcon, TwitterShareButton, TwitterIcon, RedditShareButton, RedditIcon } from 'react-share';
+import Popup from "reactjs-popup";
 
 const Card = ({ post }) => {
 
@@ -95,19 +97,50 @@ const Card = ({ post }) => {
                                     <div onClick={() => setIsUpdated(!isUpdated)}>
                                         <img src='./img/icons/edit.svg' alt="edit" />
                                     </div>
-                                    <DeleteCard id={post._id}/>
+                                    <DeleteCard id={post._id} />
                                 </div>
                             )}
                             <div className="card-footer">
                                 <div className="comment-icon">
-                                    <img onClick= {() =>setShowComments(!showComments)}src="./img/icons/message1.svg" alt="comment" />
+                                    <img onClick={() => setShowComments(!showComments)} src="./img/icons/message1.svg" alt="comment" />
                                     <span>{post.comments.length}</span>
                                 </div>
                                 <LikeButton post={post} />
-                                <img src='./img/icons/share.svg' alt="share" />
+
+                                <Popup trigger={<img src='./img/icons/share.svg' alt="share" onclick />} position={
+                                    ['bottom center', 'bottom right', 'bottom left']} closeOnDocumentClick >
+                                    <div>Partager via</div>
+                                    <div>
+                                        <EmailShareButton>
+                                            <EmailIcon size={32} round={true} />
+                                        </EmailShareButton >
+                                        <FacebookShareButton
+                                            url={post.video}
+                                            quote={post.title}
+                                            hashtag="#Boolean-Média">
+                                            <FacebookIcon size={32} round={true} />
+                                        </FacebookShareButton >
+                                        <TelegramShareButton
+                                            title={post.title}>
+                                            <TelegramIcon size={32} round={true} />
+                                        </TelegramShareButton >
+                                        <TwitterShareButton
+                                            url={post.video}
+                                            via={post.title}
+                                            hashtag="#Boolean-Média">
+                                            <TwitterIcon size={32} round={true} />
+                                        </TwitterShareButton >
+                                        <RedditShareButton
+                                            title={post.title}
+                                            url={post.video}>
+                                            <RedditIcon size={32} round={true} />
+                                        </RedditShareButton >
+                                    </div>
+                                </Popup>
+
                                 {/* a faire !! */}
                             </div>
-                            {showComments && <CardComments post={post}/>}
+                            {showComments && <CardComments post={post} />}
                         </div>
                     </>
                 )}
