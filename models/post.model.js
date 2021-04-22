@@ -31,6 +31,13 @@ const PostSchema = new mongoose.Schema(
                 }
             ], 
             required: true,
+        },
+        Rating: {
+            type: [{
+                ratingId:String, 
+                ratingPseudo: String,
+                rating: Number
+            }]
         }
     },
     {

@@ -43,7 +43,11 @@ const userSchema = new mongoose.Schema(
         },
         likes: {
             type: [String] // permettre d'avoir un tableau des ID des posts likés, pour que le user ne puisse pas liker plusieurs fois un post & retourver les posts likés 
+        },
+        rating: {
+            type: [String]
         }
+        
     },
     {
         timestamps: true,
@@ -52,7 +56,7 @@ const userSchema = new mongoose.Schema(
 
 // play function before save into db;crypter avant d'enregistrer le mot de passe 
 //pre est une méthode de bcrypt
-//le next est une methode qui dit 'une foois que tu as fait ça passe à la suite 
+//le next est une methode qui dit 'une fois que tu as fait ça passe à la suite 
 userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
