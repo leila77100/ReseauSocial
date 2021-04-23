@@ -7,6 +7,7 @@ export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
+export const RATING_POST = "RATING_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
@@ -73,6 +74,20 @@ export const unlikePost = (postId, userId) => {
                 dispatch({ type: UNLIKE_POST, payload: { postId, userId } });
             })
             .catch((err) => console.log(err))
+    }
+}
+
+export const ratingPost = (postId, rating) => {
+    return (dispatch) => {
+        return axios ({
+            method: 'post',
+            url: `${process.env.REACT_APP_API_URL}api/post/rating-post/${postId}`,
+            data: {rating}
+        })
+        .then((res)=> {
+            dispatch({type: RATING_POST, payload: {postId, rating}});
+        })
+        .catch((err) => console.log(err))
     }
 }
 

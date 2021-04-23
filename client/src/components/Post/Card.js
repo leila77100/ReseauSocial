@@ -9,6 +9,7 @@ import CardComments from './CardComments';
 import { EmailShareButton, EmailIcon, FacebookShareButton, FacebookIcon, TelegramShareButton, TelegramIcon, TwitterShareButton, TwitterIcon, RedditShareButton, RedditIcon } from 'react-share';
 import Popup from "reactjs-popup";
 import Rating from './Rating';
+import RatingStar from './RatingStar';
 
 const Card = ({ post }) => {
 
@@ -147,7 +148,7 @@ const Card = ({ post }) => {
                                     <span>{post.comments.length}</span>
                                 </div>
                                 <div>
-                                    <Rating/>
+                                    <RatingStar post={post}/>
                                 </div>
                                 <div>
                                 <LikeButton post={post} />

@@ -189,6 +189,9 @@
         cursor: pointer;
         transition: all 0.3s;
       }
+      input[type="radio"] {
+        display: none;
+      }
       img {
         height: 22px;
         width: 22px;

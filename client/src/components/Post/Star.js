@@ -3,16 +3,15 @@ import React from 'react';
 export function Star({count, value, 
     inactiveColor='#ddd',
     size=40,
-    activeColor='yellow', onChange, averageParent}) {
+    activeColor='yellow', onChange}) {
 
   // short trick 
   const stars = Array.from({length: count}, () => '🟊')
 
   // Internal handle change function
-  const handleChange = (value, averagePost) => {
+  const handleChange = (value) => {
     onChange(value + 1);
-    averageParent()
-    console.log("test value", averagePost)
+    console.log("lalala")
   }
  
 
@@ -25,7 +24,7 @@ export function Star({count, value,
           
         }
         return (
-          <span className="star" 
+          <span className={"star"} 
             key={index}
             style={{color: style, width:size, height:size, fontSize: size}}
             onClick={()=>handleChange(index)}

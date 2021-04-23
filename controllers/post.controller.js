@@ -48,6 +48,7 @@ module.exports.createPost = async (req, res) => {
         video: req.body.video,
         likers: [],
         comments: [],
+        rating: 3,
     });
 
     try {
@@ -147,6 +148,25 @@ module.exports.unlikePost = async (req, res) => {
             }
         );
     } catch (err) {
+        return res.status(400).send(err);
+    }
+}
+
+module.exports.ratingPost =  (req, res) => {
+    
+    try{
+        return PostModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set : {rating: req.body.rating},
+            },
+            {new : true},
+            (err, docs) =>{
+                if(!err) return res.send(docs);
+                else return res.status(400).send("caca");
+            }
+        );
+    }catch (err) {
         return res.status(400).send(err);
     }
 }

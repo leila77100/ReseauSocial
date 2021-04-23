@@ -7,7 +7,7 @@ const Rating = () => {
     const [rating, setRating] = useState(2);
     const [globalRating, setGlobalRating] = useState([]);
     const [isRating, setIsRating] = useState(false)
-    const [averagePost, setAveragePost] = useState(null)
+    const [averagePost, setAveragePost] = useState()
 
 
     let meanings = {
@@ -16,27 +16,30 @@ const Rating = () => {
         3: "Top info!🙂",
     };
 
- 
-    const handleChange = (value) => {
-        setRating(value);
-        setGlobalRating([...globalRating, value]);
-        setIsRating(true);
-        // console.log("test average", averagePost)
-        
-    }
-
-    // console.log("global rating", globalRating)
-
     let sum = 0;
     let total = 0;
 
-    const average =  (value) => {
+    const average =  async () => {
         for (let i = 0; i < globalRating.length; i++) {
             sum += globalRating[i];
             total =  sum / globalRating.length;
-             setAveragePost(total)
         }
+        return setAveragePost(total);
     }
+    
+    const handleChange = async  (value) => {
+        setRating(value);
+        setGlobalRating([...globalRating, value]);
+        await average(); 
+        setIsRating(true);
+        
+    }
+    
+    
+    console.log("test average", averagePost)
+    console.log("global rating", globalRating)
+    
+    
 
 
 
@@ -53,7 +56,7 @@ const Rating = () => {
                     activeColor={'yellow'}
                     inactiveColor={'#ddd'}
                     onChange={handleChange}
-                    averageParent={average}
+                    
                 
                 />
             </div>
