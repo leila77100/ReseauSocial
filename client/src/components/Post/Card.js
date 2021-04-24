@@ -8,7 +8,6 @@ import DeleteCard from './DeleteCard';
 import CardComments from './CardComments';
 import { EmailShareButton, EmailIcon, FacebookShareButton, FacebookIcon, TelegramShareButton, TelegramIcon, TwitterShareButton, TwitterIcon, RedditShareButton, RedditIcon } from 'react-share';
 import Popup from "reactjs-popup";
-import Rating from './Rating';
 import RatingStar from './RatingStar';
 
 const Card = ({ post }) => {

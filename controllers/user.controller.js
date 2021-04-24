@@ -120,4 +120,33 @@ module.exports.unfollow = async (req, res) => {
     catch (err) {
         return res.status(500).json({ message: err })
     }
-}
+};
+// permet l'enregistrement de la note
+
+module.exports.ratingUser = async (req, res) => {
+    console.log('tes params', req.body)
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send('ID unknown: ' + req.params.id);
+    try {
+        await UserModel.findByIdAndUpdate(
+            req.params.id,
+
+            {
+                $push: {
+                    rating: {
+                        postId: req.body.postId,
+                        ratingP: req.body.newRating,
+                    }
+                }
+            },
+            { new: true },
+            (err, docs) => {
+                if (!err) return res.send(docs);
+                else return res.status(400).send(err);
+            }
+        );
+    }
+    catch (err) {
+        return res.status(400).send(err);
+    }
+};

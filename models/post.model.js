@@ -33,8 +33,8 @@ const PostSchema = new mongoose.Schema(
             required: true,
         },
         rating: {
-            type: Number,
-        },
+            type:Number,
+            },
     },
     {
         timestamps: true,

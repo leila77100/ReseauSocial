@@ -45,9 +45,13 @@ const userSchema = new mongoose.Schema(
             type: [String] // permettre d'avoir un tableau des ID des posts likés, pour que le user ne puisse pas liker plusieurs fois un post & retourver les posts likés 
         },
         rating: {
-            type: [String]
-        }
-        
+            type: [
+                {
+                    postId: String,
+                    ratingP: Number,
+                }
+            ]
+        },
     },
     {
         timestamps: true,

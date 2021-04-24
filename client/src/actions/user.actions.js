@@ -6,6 +6,7 @@ export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const UPDATE_BIO = "UPDATE_BIO";
 export const FOLLOW_USER = "FOLLOW_USER";
 export const UNFOLLOW_USER = "UNFOLLOW_USER";
+export const RATING_USER= "RATING_USER";
 
 export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
@@ -80,5 +81,20 @@ export const unfollowUser = (followerId, idToUnfollow) => {
                 dispatch({ type: UNFOLLOW_USER, payload: { idToUnfollow } })
             })
             .catch((err) => console.log(err));
+    }
+}
+
+export const ratingUser = (userId, postId, newRating) => {
+
+    return (dispatch) => {
+        return axios({
+            method: 'patch',
+            url: `${process.env.REACT_APP_API_URL}api/user/rating-user/` + userId,
+            data: {newRating}
+        })
+        .then((res)=> {
+            dispatch({type: RATING_USER, payload: {newRating, postId}})
+        })
+        .catch((err)=> console.log(err))
     }
 }

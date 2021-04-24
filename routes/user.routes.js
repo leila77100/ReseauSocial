@@ -18,7 +18,8 @@ router.delete('/:id', userController.deleteUser);
 
 //le patch permet de mettre à jour le tableau à l'intérieur d'un utilisateur
 router.patch('/follow/:id', userController.follow);
-router.patch('/unfollow/:id', userController.unfollow)
+router.patch('/unfollow/:id', userController.unfollow);
+router.patch('/rating-user/:id', userController.ratingUser);
 
 //upload
 router.post('/upload', upload.single('file'), uploadController.uploadProfil)
