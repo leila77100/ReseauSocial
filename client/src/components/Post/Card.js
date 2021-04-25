@@ -67,13 +67,13 @@ const Card = ({ post }) => {
                             </div>
                             {isUpdated === false &&
                                 <div style={{
-                                   display: "inline-flex",  
-                                   alignItems: "center",
+                                    display: "inline-flex",
+                                    alignItems: "center",
                                     flexWrap: "wrap"
                                 }}>
                                     <p>{post.message}</p>
                                     <span >
-                                        <Popup trigger={<img src='./img/icons/share.svg' alt="share" style={{cursor: "pointer"}} />} position={
+                                        <Popup trigger={<img src='./img/icons/share.svg' alt="share" style={{ cursor: "pointer" }} />} position={
                                             ['bottom center', 'bottom right', 'bottom left']} closeOnDocumentClick >
                                             <div>Partager via</div>
                                             <div>
@@ -147,10 +147,10 @@ const Card = ({ post }) => {
                                     <span>{post.comments.length}</span>
                                 </div>
                                 <div>
-                                    <RatingStar post={post}/>
+                                    <RatingStar post={post} />
                                 </div>
                                 <div>
-                                <LikeButton post={post} />
+                                    <LikeButton post={post} />
                                 </div>
                             </div>
                             {showComments && <CardComments post={post} />}

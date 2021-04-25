@@ -93,7 +93,7 @@ export const ratingUser = (userId, postId, newRating) => {
             data: {newRating}
         })
         .then((res)=> {
-            dispatch({type: RATING_USER, payload: {newRating, postId}})
+            dispatch({type: RATING_USER, payload: {newRating, postId, userId}})
         })
         .catch((err)=> console.log(err))
     }

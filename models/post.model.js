@@ -27,14 +27,14 @@ const PostSchema = new mongoose.Schema(
                     commenterId: String,
                     commenterPseudo: String, 
                     text: String,
-                    timestamps: Number,
+                    timestamp: Number,
                 }
             ], 
             required: true,
         },
         rating: {
             type:Number,
-            },
+        },
     },
     {
         timestamps: true,

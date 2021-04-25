@@ -1,23 +1,24 @@
-import React, {useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UidContext } from "../AppContext";
 import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { ratingPost } from "../../actions/post.actions";
-import {ratingUser} from "../../actions/user.actions";
+import { ratingUser } from "../../actions/user.actions";
 
-const RatingStar = ({ post }) => {
+const RatingStar = ({ post}) => {
 
     const [newRating, setNewRating] = useState(null);
     const [hover, setHover] = useState(null);
     const [globalRating, setGlobalRating] = useState([]);
     const [isRating, setIsRating] = useState(false);
     const [averagePost, setAveragePost] = useState();
-    const [averageDB, setAverageBdd] = useState(true);
+    
 
     const dispatch = useDispatch();
     const uid = useContext(UidContext);
+    // const usersData = useSelector((state) => state.usersReducer);
     // const posts = useSelector((state) => state.postReducer);
-    
+
 
 
     const handleClick = async (ratingValue) => {
@@ -36,9 +37,9 @@ const RatingStar = ({ post }) => {
         2: "Interessant!😐",
         3: "Top info!🙂",
     };
-    
+
     if (isRating === true) {
-        
+
         console.log('test irating', isRating)
 
         for (let i = 0; i < globalRating.length; i++) {
@@ -48,19 +49,31 @@ const RatingStar = ({ post }) => {
             console.log('test globalrating et isRating', newRating)
         }
         setIsRating(false)
-        
-        
+
+
         dispatch(ratingPost(post._id, averagePost))
     } else {
         console.log('error')
     }
 
+ 
+
     // useEffect(() => {
-    //     if (averageDB) {
-    //         setAverageBdd(false)
-    //     }
-    // }, [averagePost])
-    // console.log('total f2', averagePost);
+        //   console.log("test de uid", post);
+
+    //     usersData.map((user) => {
+    //         for (let i = 0; i < user.rating.length; i++) {
+               
+    //             if (user.rating[i].postId === post._id) {
+    //                 console.log("tralala", user.rating[i].ratingP)
+    //                 ratingValue = user.rating[i].ratingP
+    //             }
+    //         } 
+    //     })
+    // }, [])
+
+
+    console.log('total f2', averagePost);
 
 
     return (
