@@ -30,11 +30,11 @@ export default function userReducer(state = initialState, action) {
         return state.map((post) => {
             if(post._id === action.payload.postId) {
                 return {
-                    ...state,
+                    ...post,
                     rating: post.rating.filter((id) =>id !== action.payload.rating)
                 }
             }
-            return state;
+            return post;
         })
         default:
             return state

@@ -98,7 +98,6 @@ module.exports.unfollow = async (req, res) => {
     try {
         await UserModel.findByIdAndUpdate(
             req.params.id,
-            //le addToSet veut dire rajoute à ce qu'on a déjà mis
             { $pull: { following: req.body.idToUnfollow } },
             { new: true, upsert: true },
             (err, docs) => {
@@ -124,20 +123,20 @@ module.exports.unfollow = async (req, res) => {
 // permet l'enregistrement de la note
 
 module.exports.ratingUser = async (req, res) => {
-    console.log('tes params', req.body)
+    console.log('test params coté back', req.body)
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('ID unknown: ' + req.params.id);
     try {
         await UserModel.findByIdAndUpdate(
             req.params.id,
-
+            console.log('tralala'),
             {
                 $push: {
                     rating: {
                         postId: req.body.postId,
                         ratingP: req.body.newRating,
-                    }
-                }
+                    },
+                },
             },
             { new: true },
             (err, docs) => {

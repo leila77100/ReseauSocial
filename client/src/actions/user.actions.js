@@ -85,16 +85,16 @@ export const unfollowUser = (followerId, idToUnfollow) => {
 }
 
 export const ratingUser = (userId, postId, newRating) => {
-
+console.log("test de userId dans action", userId)
     return (dispatch) => {
         return axios({
             method: 'patch',
-            url: `${process.env.REACT_APP_API_URL}api/user/rating-user/` + userId,
-            data: {newRating}
+            url: `${process.env.REACT_APP_API_URL}api/user/rating-user/${userId}`,
+            data: {newRating,  postId, userId}
         })
         .then((res)=> {
-            dispatch({type: RATING_USER, payload: {newRating, postId, userId}})
+            dispatch({type: RATING_USER, payload: {userId, postId, newRating}})
         })
-        .catch((err)=> console.log(err))
+        .catch((err)=> console.log('catchde lalala',err))
     }
 }
