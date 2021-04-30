@@ -22,7 +22,7 @@ const UpdateProfil = () => {
     }
 
     return (
-        <div className="prfil-container">
+        <div className="profil-container">
             <LeftNav />
             <h1>Profil de {userData.pseudo}</h1>
             <div className="update-container">

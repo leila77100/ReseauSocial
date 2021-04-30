@@ -35,6 +35,8 @@ module.exports.signInErrrors = (err)=>{
     return errors;
 }
 
+//-------------------------------GESTION DES ERREURS EN LIEN AVEC L'UPLOAD D'IMAGE----------------------------------------------------------
+
 module.exports.uploadErrors = (err) => {
   let errors = { format: "", maxSize: ""}; 
 

@@ -80,7 +80,7 @@ const Card = ({ post }) => {
                                                 <EmailShareButton>
                                                     <EmailIcon size={32} round={true} />
                                                 </EmailShareButton >
-                                                <FacebookShareButton
+                                                <FacebookShareButton 
                                                     url={post.video}
                                                     quote={post.title}
                                                     hashtag="#Boolean-Média">
@@ -116,7 +116,7 @@ const Card = ({ post }) => {
                                     <div className="button-container">
                                         <button className="btn" onClick={updateItem} >
                                             Valider modification
-        </button>
+                                        </button>
                                     </div>
                                 </div>
                             )}

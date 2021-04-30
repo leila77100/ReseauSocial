@@ -124,21 +124,21 @@ module.exports.unfollow = async (req, res) => {
 
 module.exports.ratingUser = async (req, res) => {
     console.log('test params coté back', req.body)
-    if (!ObjectID.isValid(req.params.id))
+    if (!ObjectID.isValid(req.params.id) || !ObjectID.isValid(req.body.postId))
     return res.status(400).send('ID unknown: ' + req.params.id);
+    
     try {
         await UserModel.findByIdAndUpdate(
             req.params.id,
-            console.log('tralala'),
             {
-                $push: {
+                $addToSet: {
                     rating: {
                         postId: req.body.postId,
                         ratingP: req.body.newRating,
                     },
                 },
             },
-            { new: true },
+            { new: true, upsert: true },
             (err, docs) => {
                 if (!err) return res.send(docs);
                 else return res.status(400).send(err);

@@ -27,15 +27,31 @@ export default function userReducer(state = initialState, action) {
                 following: state.following.filter((id) => id !== action.payload.idToUnfollow),
             }
         case RATING_USER: 
-        return state.map((post) => {
-            if(post._id === action.payload.postId) {
+        return state.map((user)=> {
+            if (user._id === action.payload.userId){
                 return {
-                    ...post,
-                    rating: post.rating.filter((id) =>id !== action.payload.rating)
+                    ...user,
+                    rating: user.rating.map((ratingUser) => {
+                        if(ratingUser.postId === action.payload.postId){
+                            return {
+                                ...ratingUser,
+                                ratingP: action.payload.newRating
+                            }
+                        } else return ratingUser
+                    } )
                 }
-            }
-            return post;
+            } else return user;
         })
+        
+        // state.map((post) => {
+        //     if(post._id === action.payload.postId) {
+        //         return {
+        //             ...post,
+        //             rating: post.rating.filter((id) =>id !== action.payload.rating)
+        //         }
+        //     }
+        //     return post;
+        // })
         default:
             return state
     }

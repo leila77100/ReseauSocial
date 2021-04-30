@@ -89,8 +89,8 @@ console.log("test de userId dans action", userId)
     return (dispatch) => {
         return axios({
             method: 'patch',
-            url: `${process.env.REACT_APP_API_URL}api/user/rating-user/${userId}`,
-            data: {newRating,  postId, userId}
+            url: `${process.env.REACT_APP_API_URL}api/user/rating-user/` + userId,
+            data: {newRating,  postId, id:userId}
         })
         .then((res)=> {
             dispatch({type: RATING_USER, payload: {userId, postId, newRating}})
