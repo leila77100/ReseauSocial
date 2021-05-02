@@ -22,6 +22,7 @@ const FriendsHint = () => {
                     return array.push(user._id);
             else return null;
             })
+            // give a random list in suggestion
             array.sort(() => 0.5 - Math.random())
             if (window.innerHeight > 780) {
                 array.length = 5;
@@ -34,6 +35,7 @@ const FriendsHint = () => {
             } else {
                 array.length = 0
             }
+            // only contains  ID
             setFriendsHint(array);
         }
 

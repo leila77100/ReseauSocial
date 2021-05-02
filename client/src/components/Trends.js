@@ -13,8 +13,11 @@ const Trends = () => {
 
     useEffect(() => {
         if (!isEmpty(posts[0])) {
+            // allows you to transform the data which is in the form of an object into an array to perform a sorting
             const postsArr = Object.keys(posts).map((i) => posts[i]);
+            // a is the smallest and b is the biggest
             let sortedArray = postsArr.sort((a, b) => {
+                // return the posts most liked at least liked
                 return b.likers.length - a.likers.length;
             })
             sortedArray.length = 4;

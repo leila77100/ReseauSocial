@@ -1,4 +1,4 @@
-//-------------------------------GESTION DES ERREURS EN LIEN AVEC LE SIGNUP----------------------------------------------------------
+//-------------------------------ERRORS WITH SIGNUP----------------------------------------------------------
 
 module.exports.signUpErrors = (err) => {
     let errors = { pseudo: '', email: '', password: '' }
@@ -22,7 +22,7 @@ module.exports.signUpErrors = (err) => {
 };
 
 
-//-------------------------------GESTION DES ERREURS EN LIEN AVEC LE SIGNIN----------------------------------------------------------
+//-------------------------------ERRORS WITH SIGNIN----------------------------------------------------------
 
 module.exports.signInErrrors = (err)=>{
     let errors = {email: "", password:""}
@@ -35,7 +35,7 @@ module.exports.signInErrrors = (err)=>{
     return errors;
 }
 
-//-------------------------------GESTION DES ERREURS EN LIEN AVEC L'UPLOAD D'IMAGE----------------------------------------------------------
+//-------------------------------ERRORS WITH UPLOAD-PICTURE----------------------------------------------------------
 
 module.exports.uploadErrors = (err) => {
   let errors = { format: "", maxSize: ""}; 

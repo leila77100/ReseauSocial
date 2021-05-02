@@ -8,8 +8,10 @@ const NewPostForm = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [message, setMessage] = useState('');
+    // photo that is visible on the front
     const [postPicture, setPostPicture] = useState(null);
     const [video, setVideo] = useState('');
+    // file that I send to the back
     const [file, setFile] = useState();
     const userData = useSelector((state) => state.userReducer);
     const error = useSelector((state) => state.errorReducer.postError);
@@ -47,9 +49,11 @@ const NewPostForm = () => {
     }
 
     const handleVideo = () => {
+        // put each element of the message in an array at each space
         let findLink = message.split(" ");
         for (let i = 0; i < findLink.length; i++) {
             if (findLink[i].includes("https://www.yout") || findLink[i].includes("https://yout")) {
+                // we are looking for the element "watch?v=" et and we replace it with "embed" so that it is readable 
                 let embed = findLink[i].replace('watch?v=', "embed/");
                 setVideo(embed.split('&')[0]);
                 findLink.splice(i, 1);
@@ -87,7 +91,7 @@ const NewPostForm = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}                        
                         />
-
+{/* allows preview */}
                         {message || postPicture || video.length > 20 ? (
                             <li className="card-container">
                                 <div className="card-left">

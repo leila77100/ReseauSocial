@@ -22,6 +22,9 @@ const SignUpForm = () => {
         //permet d'effacer les erreurs
         passwordConfirmError.innerHTML = "";
         termsError.innerHTML = "";
+        pseudoError.innerHTML= "";
+        emailError.innerHTML= "";
+        passwordError.innerHTML="";
 
         if (password !== controlPassword || !terms.checked) {
             if (password !== controlPassword)

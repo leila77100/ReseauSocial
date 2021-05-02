@@ -1,18 +1,27 @@
 const PostModel = require('../models/post.model');
 const UserModel = require('../models/user.model');
 const { uploadErrors } = require('../utils/error.utils')
+// for file integration 
 const fs = require('fs');
 const stream = require('stream');
 const util = require('util');
 const pipeline = util.promisify(stream.pipeline);
-const ObjectID = require('mongoose').Types.ObjectId; // permet de vérifier que le paramètre qui est passé  existe déja dans la base de données
+// Check that the ID exists in the database
+const ObjectID = require('mongoose').Types.ObjectId; 
+
+
+// -------------------------------------------------readPost---------------------------
 
 module.exports.readPost = (req, res) => {
     PostModel.find((err, docs) => {
         if (!err) res.send(docs);
         else console.log('error to get data: ' + err);
     }).sort({ createdAt: -1 })
+    // put comments from the most recent to the oldest 
 }
+
+
+// -------------------------------------------------createPost---------------------------
 
 module.exports.createPost = async (req, res) => {
     let fileName;
@@ -25,7 +34,7 @@ module.exports.createPost = async (req, res) => {
                 req.file.detectedMimeType != `image/jpeg`
             )
                 throw Error("invalid File");
-            // le throw nous fait partir directement au catch
+            // throw takes us directly to the catch
             if (req.file.size > 500000) throw Error("max size");
         } catch (err) {
             const errors = uploadErrors(err);
@@ -59,6 +68,8 @@ module.exports.createPost = async (req, res) => {
         return res.status(400).send(err);
     }
 }
+
+//-------------------------------------------UpdatePost-----------------------------
 module.exports.updatePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown: ' + req.params.id);
@@ -76,6 +87,9 @@ module.exports.updatePost = (req, res) => {
         }
     )
 }
+
+//---------------------------------------------DeletePost------------------------------------
+
 module.exports.deletePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown: ' + req.params.id);
@@ -87,6 +101,8 @@ module.exports.deletePost = (req, res) => {
     )
 
 };
+
+//---------------------------------------------LikePost------------------------------------
 
 module.exports.likePost = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -119,7 +135,7 @@ module.exports.likePost = async (req, res) => {
     }
 }
 
-
+//---------------------------------------------UnlikePost------------------------------------
 
 module.exports.unlikePost = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -152,6 +168,8 @@ module.exports.unlikePost = async (req, res) => {
     }
 }
 
+//---------------------------------------------RatingPost------------------------------------
+
 module.exports.ratingPost =  (req, res) => {
     
     try{
@@ -163,13 +181,15 @@ module.exports.ratingPost =  (req, res) => {
             {new : true},
             (err, docs) =>{
                 if(!err) return res.send(docs);
-                else return res.status(400).send("caca");
+                else return res.status(400).send(err);
             }
         );
     }catch (err) {
         return res.status(400).send(err);
     }
 }
+
+//---------------------------------------------CommentPost------------------------------------
 
 module.exports.commentPost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -200,6 +220,8 @@ module.exports.commentPost = (req, res) => {
   };
 
 
+  //---------------------------------------------EditCommentPost------------------------------------
+
 module.exports.editCommentPost = (req, res) => {
    
     if (!ObjectID.isValid(req.params.id))
@@ -228,6 +250,7 @@ module.exports.editCommentPost = (req, res) => {
     }
 }
 
+//---------------------------------------------DeleteCommentPost------------------------------------
 
 module.exports.deleteCommentPost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))

@@ -1,5 +1,5 @@
-const express = require('express'); // framework léger qui permet de coder plus rapidement
-const bodyParser = require('body-parser');// permet de retourner du JSON dans le req
+const express = require('express'); 
+const bodyParser = require('body-parser');// return JSON in the req
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes')
@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const app = express();
 
-// donne les autorisations à faire des requêtes - si on ne passe rien en paramètre n'importe qui peut requêter et avoir accès à nos données
+// gives permissions to make requests - if we do not pass anything in parameter anyone can request and have access to our data
 const corsOptions = {
     origin: process.env.CLIENT_URL, 
     credentials: true,
@@ -21,24 +21,24 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-  app.use(bodyParser.json()); // permet de traiter la data qui va transiter d'un point A à un poinnt B
+  app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({extended: true})); 
-  app.use(cookieParser()); //middleware qui permet la lecture de l'information 
+  app.use(cookieParser()); //middleware which allows to read the cookie
   
 
 //jwt
-// a chaque requête en GET il va y avoir un check de l'utilisateur 
+// check user  at each request
 app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res)=>{
     res.status(200).send(res.locals.user._id)
 });
 
 //routes 
-app.use('/api/user', userRoutes); // toutes les requêtes commençant par /api/user emmeneront vers userRoutes
+app.use('/api/user', userRoutes); 
 app.use('/api/post', postRoutes);
 
 
-//server: toujours en dernier
+//server: always last
     app.listen(process.env.PORT, () =>{
         console.log(`listening on port ${process.env.PORT}`);
     })

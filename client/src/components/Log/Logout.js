@@ -19,7 +19,7 @@ const loggout = async () => {
     })
     .then(()=> removeCookie('jwt'))
     .catch((err) => console.log(err))
-
+// allows you to go back to the reception and check if the user is existing /jwtid
     window.location = "/"
 }
 

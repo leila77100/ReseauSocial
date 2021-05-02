@@ -7,7 +7,7 @@ const { uploadErrors } = require('../utils/error.utils');
 
 
 module.exports.uploadProfil = async ( req, res) => {
-    // si le format de l'image n'est pas en jpg, png ou jpeg alors fichier refusé 
+    // if the image format is not in jpg, png or jpeg then file refused
     try {
         if (
             req.file.detectedMimeType != `image/jpg` && 
@@ -15,7 +15,7 @@ module.exports.uploadProfil = async ( req, res) => {
             req.file.detectedMimeType != `image/jpeg`
             )
             throw Error("invalid File");
-        // le throw nous fait partir directement au catch
+        // the throw makes us go directly to the catch
         if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
         const errors = uploadErrors(err);

@@ -8,7 +8,9 @@ const SignInForm = () => {
 
 
     const handleLogin = (e) => {
+        // allows the page not to be reloaded when the form is sent
         e.preventDefault();
+        // allows you to inject html
         const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error')
 
@@ -22,17 +24,18 @@ const SignInForm = () => {
             }
         }
         ).then((res) => {
-            console.log('test res', res)
+
             if (res.data.errors) {
-emailError.innerHTML = res.data.errors.email;
-passwordError.innerHTML = res.data.errors.password;
-            }else{
+                emailError.innerHTML = res.data.errors.email;
+                passwordError.innerHTML = res.data.errors.password;
+            } else {
+                //create a cookie and connect
                 window.location = '/'
             }
         })
-        .catch((err) => {
-            console.log(err)
-        });
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
     return (
@@ -45,7 +48,7 @@ passwordError.innerHTML = res.data.errors.password;
                 id="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
-                 />
+            />
             <div className="email error"></div>
             <br />
             <label htmlFor="password">Mot de passe</label>

@@ -1,15 +1,15 @@
 
 const UserModel = require('../models/user.model');
-//sert à la vérification: controler que les ID sont reconnus par la bd
+//check if ID is known to the database
 const ObjectID = require('mongoose').Types.ObjectId;
 
 module.exports.getAllUsers = async (req, res) => {
-    const users = await UserModel.find().select('-password');// le -password permet de ne jamais renvoyer le password dans le front 
+    const users = await UserModel.find().select('-password');// the -password allows never to return the password in the front
     res.status(200).json(users);
 }
 
 
-// ----------------------------------------------------------permet la recherche des informations de l'utilisateur -------------------------------------------------------------
+// ----------------------------------------------------------allows the search for user information -------------------------------------------------------------
 
 module.exports.userInfo = (req, res) => {
     console.log(req.params);
@@ -23,7 +23,7 @@ module.exports.userInfo = (req, res) => {
     }).select('-password');
 };
 
-//------------------------------------------------------------permet la mise à jour des données user --------------------------------------------------------
+//------------------------------------------------------------allows user data to be updated --------------------------------------------------------
 
 module.exports.updateUser = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -47,7 +47,7 @@ module.exports.updateUser = async (req, res) => {
     }
 }
 
-//------------------------------------------------------------permet la suppression des données user --------------------------------------------------------
+//------------------------------------------------------------allows the deletion of user data --------------------------------------------------------
 
 module.exports.deleteUser = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -60,7 +60,7 @@ module.exports.deleteUser = async (req, res) => {
     }
 }
 
-//------------------------------------------------------------permet la gestion des follow-unfollow --------------------------------------------------------
+//------------------------------------------------------------allows the management of follow-unfollow --------------------------------------------------------
 module.exports.follow = async (req, res) => {
     if (!ObjectID.isValid(req.params.id) || !ObjectID.isValid(req.body.idToFollow))
         return res.status(400).send('ID unknown: ' + req.params.id);
@@ -68,7 +68,7 @@ module.exports.follow = async (req, res) => {
         //add to the followers list
         await UserModel.findByIdAndUpdate(
             req.params.id,
-            //le addToSet veut dire rajoute à ce qu'on a déjà mis
+            //le addToSet add without overwriting
             { $addToSet: { following: req.body.idToFollow } },
             { new: true, upsert: true },
             (err, docs) => {
@@ -120,7 +120,7 @@ module.exports.unfollow = async (req, res) => {
         return res.status(500).json({ message: err })
     }
 };
-// permet l'enregistrement de la note
+// allows the recording of the note
 
 module.exports.ratingUser = async (req, res) => {
     console.log('test params coté back', req.body)

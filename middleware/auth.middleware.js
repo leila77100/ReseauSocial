@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/user.model');
 
-// fonction qui va nous permettre de vérifier à chaque moment que c'est bien le bon utilisateur 
-// pour lire un cookie avec node.js il faut importer la librairie cookie-parser
+// check at each moment that it is the right user 
+// for read a cookie with node.js you have to import the library cookie-parser
 
 module.exports.checkUser = (req, res, next) => {
     const token = req.cookies.jwt;

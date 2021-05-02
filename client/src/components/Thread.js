@@ -12,7 +12,8 @@ const Thread = () => {
     const posts = useSelector((state) => state.postReducer);
 
     const loadMore = () => {
-        // permet de recharger la page quand on a passé les 5 commentaires, affiche les 5 suivants 
+        // allows you to reload the page when you get to the bottom of the scroll (past the 5 comments), display the next 5 
+        // then restart the loading of the data posts with the count + 5
         if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
             setLoadPost(true)
         }
@@ -20,11 +21,12 @@ const Thread = () => {
 
     useEffect(() => {
         if (loadPost) {
+            // allows you to manage the infinite scroll
             dispatch(getPosts(count));
             setLoadPost(false)
             setCount(count + 5);
         }
-
+// We put a listening on the scroll of the window then we remove this listening with the return
         window.addEventListener('scroll', loadMore);
         return () => window.removeEventListener('scroll', loadMore)
     }, [loadPost, dispatch, count])

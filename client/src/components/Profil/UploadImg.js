@@ -9,7 +9,9 @@ const UploadImg = () => {
 
   const handlePicture = (e) => {
     e.preventDefault();
+    // object javascript which allows us to transmit our file + image of the data
     const data = new FormData();
+    //pass to const data the pseudo in userData (key name) and the id(key userId) and file 
     data.append("name", userData.pseudo);
     data.append("userId", userData._id);
     data.append("file", file);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LeftNav from '../LeftNav';
-import { useSelector, useDispatch } from "react-redux"; // permet de récupérer les données depuis le store 
+import { useSelector, useDispatch } from "react-redux"; 
 import UploadImg from './UploadImg';
 import { updateBio } from '../../actions/user.actions';
 import { dateParser } from '../utils';

@@ -16,7 +16,7 @@ router.get('/:id', userController.userInfo);
 router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 
-//le patch permet de mettre à jour le tableau à l'intérieur d'un utilisateur
+//le patch allows you to update the table in a table
 router.patch('/follow/:id', userController.follow);
 router.patch('/unfollow/:id', userController.unfollow);
 router.patch('/rating-user/:id', userController.ratingUser);

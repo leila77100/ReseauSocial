@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export const GET_USER = "GET_USER";// table des matières de toutes les actions
+export const GET_USER = "GET_USER";// summary of actions
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const UPDATE_BIO = "UPDATE_BIO";
 export const FOLLOW_USER = "FOLLOW_USER";
@@ -11,7 +11,7 @@ export const RATING_USER= "RATING_USER";
 export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
 export const getUser = (uid) => {
-    return (dispatch) => { // le dispacth c'est ce qu'on envoi au reducer 
+    return (dispatch) => { //  dispatch this is what we send to reducer 
         return axios
             .get(`${process.env.REACT_APP_API_URL}api/user/${uid}`)
             .then((res) => {
@@ -33,7 +33,6 @@ export const uploadPicture = (data, id) => {
                     return axios
                         .get(`${process.env.REACT_APP_API_URL}api/user/${id}`)
                         .then((res) => {
-                            console.log('test plus haut!!!!!!!', res.data)
                             dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture })
                         });
                 }
