@@ -4,6 +4,7 @@ import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { ratingPost } from "../../actions/post.actions";
 import { ratingUser } from "../../actions/user.actions";
+import { isEmpty } from '../utils';
 
 const RatingStar = ({ post }) => {
 
@@ -13,79 +14,63 @@ const RatingStar = ({ post }) => {
     const [isRating, setIsRating] = useState(false);
     const [averagePost, setAveragePost] = useState();
 
-    
+
     const dispatch = useDispatch();
     const uid = useContext(UidContext);
-    const usersData = useSelector((state) => state.usersReducer);
+    // const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
-    const posts = useSelector((state) => state.postReducer);
-    
-    
-    
+    // const posts = useSelector((state) => state.postReducer);
+
+
+
     const handleClick = async (ratingValue) => {
         setNewRating(ratingValue);
         setIsRating(true);
         setGlobalRating(ratingValue);
-       
-        
+
+
         return setGlobalRating([...globalRating, ratingValue]);
     }
-    
+
     let sum = 0;
     let total = 0;
-    
+
     let meanings = {
         1: "Fake News! 😒",
         2: "Interessant!😐",
         3: "Top info!🙂",
     };
 
-    const test = () =>{
-        
-        const newTab= userData.rating
-        console.log('averagePost', newTab)
-    
-}
-    
-    if (isRating === true) {
-        console.log('test irating', isRating)
+
+
+    if (isRating === true && !isEmpty(userData.rating)) {
+        setIsRating(false);
         dispatch(ratingUser(uid, post._id, newRating))
-        console.log('gegegegegeegegegeg');
-        
+        dispatch(ratingPost(post._id, newRating));
+
         for (let i = 0; i < globalRating.length; i++) {
             sum += globalRating[i];
             total = sum / globalRating.length;
             setAveragePost(total)
         }
-        console.log('test globalrating et isRating', globalRating, newRating)
 
-        setIsRating(false); 
-        dispatch(ratingPost(post._id, averagePost));
-        test();
-    } else {
-        console.log('error')
-    }
-    
+
+    } else console.log('error dans ma condition')
+
+
     let ratingValue;
 
 
 
     useEffect(() => {
-
-        usersData.map((user) => {
-            for (let i = 0; i < user.rating.length; i++) {
-
-                if (user.rating[i].postId === post._id) {
-                    setIsRating(true)
-                    ratingValue = user.rating[i].ratingP
-                    console.log("trjbhflbsdbjlfgalala", ratingValue)
-                } 
-                else {
-                    setIsRating(false)
-                }
-            }
-        })
-    }, [averagePost, usersData, userData])
+    //    const test = () => userData.rating.map((user)=> {
+    //       if (user.postId){
+    //           ratingValue= user.ratingP
+    //       }
+           
+    //     })
+    //    test()
+    }, [averagePost,  userData])
 
 
 
@@ -95,9 +80,11 @@ const RatingStar = ({ post }) => {
             <div>
                 <span style={{ position: 'center' }}><p>{meanings[newRating]}</p></span>
                 <div>
-                   
+
                     {[...Array(3)].map((star, i) => {
                         const ratingValue = i + 1;
+
+
                         return (
 
                             <label key={i}>
@@ -118,7 +105,8 @@ const RatingStar = ({ post }) => {
 
 
                         );
-                    })}
+                    }
+                    )}
 
                 </div>
             </div>

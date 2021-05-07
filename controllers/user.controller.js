@@ -123,10 +123,11 @@ module.exports.unfollow = async (req, res) => {
 // allows the recording of the note
 
 module.exports.ratingUser = async (req, res) => {
-    console.log('test params coté back', req.body)
-    if (!ObjectID.isValid(req.params.id) || !ObjectID.isValid(req.body.postId))
-    return res.status(400).send('ID unknown: ' + req.params.id);
     
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send('ID unknown: ' + req.params.id);
+    if (req.body.newRating===null) 
+    return res.status(400).send("vote vide")
     try {
         await UserModel.findByIdAndUpdate(
             req.params.id,

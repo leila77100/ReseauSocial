@@ -171,12 +171,14 @@ module.exports.unlikePost = async (req, res) => {
 //---------------------------------------------RatingPost------------------------------------
 
 module.exports.ratingPost =  (req, res) => {
-    
+    console.log('test params coté back', req.body)
+    if (!ObjectID.isValid(req.params.id))
+      return res.status(400).send("ID unknown : " + req.params.id);
     try{
         return PostModel.findByIdAndUpdate(
             req.params.id,
             {
-                $set : {rating: req.body.rating},
+                $push: {rating: req.body.newRating},
             },
             {new : true},
             (err, docs) =>{

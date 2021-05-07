@@ -31,7 +31,7 @@ export default function postReducer(state = initialState, action) {
                 if (post._id === action.payload.postId){
                     return {
                         ...post, 
-                        rating : action.payload.rating
+                        rating :[action.payload.newRating]
                     }
                 }
                 return post;

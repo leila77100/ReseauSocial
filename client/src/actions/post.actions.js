@@ -78,15 +78,15 @@ export const unlikePost = (postId, userId) => {
     }
 }
 
-export const ratingPost = (postId, userId, rating) => {
+export const ratingPost = (postId, newRating) => {
     return (dispatch) => {
         return axios ({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}api/post/rating-post/${postId}`,
-            data: {id:userId, rating: rating}
+            data: {newRating}
         })
         .then((res)=> {
-            dispatch({type: RATING_POST, payload: {postId, userId, rating}});
+            dispatch({type: RATING_POST, payload: {newRating, postId}});
         })
         .catch((err) => console.log(err))
     }
