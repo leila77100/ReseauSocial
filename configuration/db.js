@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-    .connect('mongodb+srv://' + process.env.DB_USER_PASS + '@cluster0.hoxrz.mongodb.net/Boolean',
+    .connect('mongodb+srv://' + process.env.DB_USER_PASS + '@cluster0.hoxrz.mongodb.net/XXXXXXXXXXXXX',
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
